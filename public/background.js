@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Optionally handle input filled events
     console.log(`Input with ID ${message.id} filled with value: ${message.value}`);
   } else if (message.type === "generateInput") {
-    const { placeholder } = message;
+    const { label, placeholder } = message;
     
     // Retrieve the API key securely from storage
     chrome.storage.local.get("apiKey", async (result) => {
@@ -26,7 +26,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         },
         {
           "role": "user",
-          "content": `Generate a suitable input for a field with placeholder "${placeholder || 'N/A'} be creative"`
+          "content": `Generate a suitable input for a field with ${label ? `label "${label}"` : ''} ${placeholder ? `placeholder "${placeholder}"` : ''} be creative and make it look like a real human input`
         }
       ];
 

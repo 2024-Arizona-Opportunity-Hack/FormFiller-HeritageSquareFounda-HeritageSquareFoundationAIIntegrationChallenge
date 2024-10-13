@@ -1,8 +1,6 @@
 // src/App.jsx
 
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
@@ -68,62 +66,43 @@ function App() {
 
   return (
     <>
-      <div className="header">
-        <a
-          href="https://vitejs.dev"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a
-          href="https://react.dev"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Dr. Fill</h1>
-      <div className="card">
-        {inputs.length === 0 ? (
-          <p>No input fields found on this page.</p>
-        ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Label</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Placeholder</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {inputs.map((input, index) => (
-                <tr key={index}>
-                  <td>{(input as any).label || "N/A"}</td>
-                  <td>{(input as any).name || "N/A"}</td>
-                  <td>{(input as any).type}</td>
-                  <td>{(input as any).placeholder || "N/A"}</td>
-                  <td>
-                    <button
-                      className="fill-button"
-                      onClick={() => handleFill(input)}
-                    >
-                      Fill
-                    </button>
-                  </td>
+      <div className="main-container">
+        <h1>Dr. Fill</h1>
+        <p className="description">This extension will automatically fill in input fields on a webpage based on your own knowledgebase.</p>
+        <div className="card">
+          {inputs.length === 0 ? (
+            <p>No input fields found on this page.</p>
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>Label</th>
+                  <th>Type</th>
+                  <th>Placeholder</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+              </thead>
+              <tbody>
+                {inputs.map((input, index) => (
+                  <tr key={index}>
+                    <td>{(input as any).label || "N/A"}</td>
+                    <td>{(input as any).type}</td>
+                    <td>{(input as any).placeholder || "N/A"}</td>
+                    <td>
+                      <button
+                        className="fill-button"
+                        onClick={() => handleFill(input)}
+                      >
+                        Fill
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more.
-      </p>
     </>
   );
 }
