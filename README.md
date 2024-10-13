@@ -1,50 +1,49 @@
-# React + TypeScript + Vite
+# FormFiller: AI-Powered Form Completion Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Team Information
+- **Team Name**: FormFiller
+- **Team Members**: Erik Faz, Juan Palomino, Eduardo Davalos
+- **Slack Channel**: #codecrafters-formfiller
 
-Currently, two official plugins are available:
+## Problem Statement
+In today's digital age, users often face the tedious task of filling out numerous online forms. This repetitive process can be time-consuming and error-prone. FormFiller aims to streamline this experience by providing an intelligent, AI-powered Chrome extension that automatically generates and fills in form fields with context-appropriate information.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- Frontend: React + TypeScript
+- Build Tool: Vite
+- Chrome Extension APIs
+- OpenAI GPT-4 and MODEL3 embedding API for intelligent form filling
+- CSS for styling
 
-## Expanding the ESLint configuration
+## Project Links
+- [DevPost Project](https://devpost.com/software/formfiller)
+- [Demo Video](https://youtu.be/your-demo-video-link)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Key Features
+- AI-powered form field generation
+- Context-aware input suggestions
+- User-friendly Chrome extension interface
+- Secure API key management
+- Customizable fill options
 
-- Configure the top-level `parserOptions` property like this:
+## Installation and Usage
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Build the extension with `npm run build`
+4. Load the extension in Chrome from the `dist` folder
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Future Enhancements
+- Multi-language support
+- Advanced form detection algorithms
+- Integration with popular password managers
+- Machine learning model for improved accuracy over time
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Contributions
+We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+---
+
+FormFiller: Revolutionizing the way you interact with online forms. Try it today and experience the future of form filling! 🚀

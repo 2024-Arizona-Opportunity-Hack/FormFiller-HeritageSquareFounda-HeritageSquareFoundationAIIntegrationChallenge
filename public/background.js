@@ -6,10 +6,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     chrome.storage.local.set({ inputFields: message.inputs });
   } else if (message.type === "inputFilled") {
     // Optionally handle input filled events
-    console.log(`Input with ID ${message.id} filled with value: ${message.value}`);
+    console.log(
+      `Input with ID ${message.id} filled with value: ${message.value}`
+    );
   } else if (message.type === "generateInput") {
     const { label, placeholder } = message;
-    
+
     // Retrieve the API key securely from storage
     chrome.storage.local.get("apiKey", async (result) => {
       const apiKey = result.apiKey;
@@ -21,35 +23,49 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       // Construct the messages array
       const messages = [
         {
-          "role": "system",
-          "content": "You are a helpful assistant that generates suitable input for form fields."
+          role: "system",
+          content:
+            "You are a helpful assistant that generates suitable input for form fields.",
         },
         {
-          "role": "user",
-          "content": `Generate a suitable input for a field with ${label ? `label "${label}"` : ''} ${placeholder ? `placeholder "${placeholder}"` : ''} be creative and make it look like a real human input`
-        }
+          role: "user",
+          content: `Generate a suitable input for a field with ${
+            label ? `label "${label}"` : ""
+          } ${
+            placeholder ? `placeholder "${placeholder}"` : ""
+          } be creative and make it look like a real human input`,
+        },
       ];
 
       try {
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // "Authorization": ``,
-          },
-          body: JSON.stringify({
-            model: "gpt-4",
-            messages: messages,
-            max_tokens: 50,
-            n: 1,
-            temperature: 0.7,
-          }),
-        });
+        const response = await fetch(
+          "https://api.openai.com/v1/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+              model: "gpt-4",
+              messages: messages,
+              max_tokens: 50,
+              n: 1,
+              temperature: 0.7,
+            }),
+          }
+        );
 
         if (!response.ok) {
           const errorData = await response.json();
-          console.error(`OpenAI API error: ${response.status} - ${response.statusText}`, errorData);
-          sendResponse({ success: false, error: `API Error: ${response.statusText}` });
+          console.error(
+            `OpenAI API error: ${response.status} - ${response.statusText}`,
+            errorData
+          );
+          sendResponse({
+            success: false,
+            error: `API Error: ${response.statusText}`,
+          });
           return;
         }
 
@@ -66,11 +82,22 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({ success: true, value: generatedValue });
       } catch (error) {
         console.error("Error communicating with OpenAI:", error);
-        sendResponse({ success: false, error: "Failed to communicate with API." });
+        sendResponse({
+          success: false,
+          error: "Failed to communicate with API.",
+        });
       }
     });
 
     return true; // Indicates asynchronous response
+  } else if (message.type === "fillFromPopup") {
+    // Query the active tab
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0]?.id) {
+        // Send a message to the content script to fill the focused input
+        chrome.tabs.sendMessage(tabs[0].id, { type: "fillFocusedInput" });
+      }
+    });
   }
 });
 

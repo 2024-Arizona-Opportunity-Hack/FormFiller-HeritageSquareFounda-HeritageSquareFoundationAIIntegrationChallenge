@@ -34,3 +34,7 @@ window.onload = () => {
     }
   });
 };
+
+document.getElementById("fillButton").addEventListener("click", () => {
+  chrome.runtime.sendMessage({ type: "fillFromPopup" });
+});

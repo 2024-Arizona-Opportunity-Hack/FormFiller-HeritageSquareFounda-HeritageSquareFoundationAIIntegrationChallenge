@@ -15,7 +15,6 @@ function App() {
       }
     };
 
-
     // Listen for changes in storage
     const handleStorageChange = (changes: any, area: any) => {
       if (area === "local" && changes.inputFields) {
@@ -46,9 +45,13 @@ function App() {
                   "user" + Math.random().toString(36).substring(2, 10);
                 const domain =
                   "example" + Math.random().toString(36).substring(2, 6);
-                (inputElement as HTMLInputElement).value = `${username}@${domain}.com`;
+                (
+                  inputElement as HTMLInputElement
+                ).value = `${username}@${domain}.com`;
               } else {
-                (inputElement as HTMLInputElement).value = Math.random().toString(36).substring(2, 10);
+                (inputElement as HTMLInputElement).value = Math.random()
+                  .toString(36)
+                  .substring(2, 10);
               }
 
               // Add a highlight effect
@@ -68,7 +71,10 @@ function App() {
     <>
       <div className="main-container">
         <h1>Dr. Fill</h1>
-        <p className="description">This extension will automatically fill in input fields on a webpage based on your own knowledgebase.</p>
+        <p className="description">
+          This extension will automatically fill in input fields on a webpage
+          based on your own knowledgebase.
+        </p>
         <div className="card">
           {inputs.length === 0 ? (
             <p>No input fields found on this page.</p>
