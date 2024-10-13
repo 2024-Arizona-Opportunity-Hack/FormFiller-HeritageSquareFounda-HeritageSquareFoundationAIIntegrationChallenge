@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "Dr. Fill",
+  "version": "1.0.0",
+  "description": "Automatically fills form fields with random data and displays input details in the popup.",
+  "permissions": ["scripting", "activeTab", "tabs", "storage"],
+  "host_permissions": [
+    "https://api.openai.com/*"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"],
+      "css": ["autofillStyles.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "fill-focused-input": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Fill the currently focused input field with random data"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["autofillStyles.css"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "options_page": "options.html",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

@@ -1,0 +1,30 @@
+/* src/autofillStyles.css */
+
+.autofill-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.2s;
+  
+  /* Positioning adjustments */
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.autofill-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.autofill-highlight {
+  border: 2px solid #4CAF50 !important;
+  transition: border 0.3s;
+}
