@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": ``,
+            // "Authorization": ``,
           },
           body: JSON.stringify({
             model: "gpt-4",
